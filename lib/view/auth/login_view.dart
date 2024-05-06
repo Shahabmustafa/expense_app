@@ -1,7 +1,7 @@
+import 'package:expense_app/controller/auth/authentication_controller.dart';
 import 'package:expense_app/view/auth/signup_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/custom_bottom_navigation_bar.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -11,6 +11,10 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +55,7 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   TextFormField(
+                    controller: email,
                     decoration: InputDecoration(
                       hintText: "Email",
                       border: OutlineInputBorder(
@@ -62,6 +67,7 @@ class _LoginViewState extends State<LoginView> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: password,
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: const Icon(Icons.lock),
@@ -75,7 +81,11 @@ class _LoginViewState extends State<LoginView> {
             ),
             ElevatedButton(
               onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNavigationBarScreen()));
+                AuthenticationController.isLogin(
+                  context,
+                  email.text.trim(),
+                  password.text.trim(),
+                );
               },
               child: Text("Login"),
             )
