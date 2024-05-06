@@ -1,3 +1,4 @@
+import 'package:expense_app/controller/auth/authentication_controller.dart';
 import 'package:flutter/material.dart';
 import 'login_view.dart';
 
@@ -9,6 +10,9 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  TextEditingController userName = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +45,7 @@ class _SignUpViewState extends State<SignUpView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
+              controller: userName,
               decoration: InputDecoration(
                 hintText: "Name",
                 border: OutlineInputBorder(
@@ -52,6 +57,7 @@ class _SignUpViewState extends State<SignUpView> {
               height: 10,
             ),
             TextFormField(
+              controller: email,
               decoration: InputDecoration(
                 hintText: "Email",
                 border: OutlineInputBorder(
@@ -63,6 +69,7 @@ class _SignUpViewState extends State<SignUpView> {
               height: 10,
             ),
             TextFormField(
+              controller: password,
               decoration: InputDecoration(
                 hintText: "Password",
                 suffixIcon: const Icon(Icons.lock),
@@ -87,7 +94,14 @@ class _SignUpViewState extends State<SignUpView> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                AuthenticationController.isSignUp(
+                  context,
+                  userName.text.trim(),
+                  email.text.trim(),
+                  password.text.trim(),
+                );
+              },
               child: Text("Sign Up"),
             )
           ],
